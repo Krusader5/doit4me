@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IR Merch | Infinite Rezultz</title>
+  <style>
+    :root {
+      --blue:       #0A2E6E;
+      --blue-mid:   #1A4DB8;
+      --blue-light: #2D6BE4;
+      --orange:     #F97316;
+      --orange-dark:#D95F05;
+      --white:      #FFFFFF;
+      --off-white:  #F8F9FF;
+      --gray-light: #E8ECF5;
+      --gray-text:  #555E7A;
+      --dark:       #080F1F;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: var(--dark); background: var(--white); line-height: 1.6;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 5%;
+      background: rgba(8,15,31,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--orange);
+    }
+    .nav-logo {
+      font-size: 1.5rem; font-weight: 900; letter-spacing: -0.5px;
+      color: var(--white); text-decoration: none;
+    }
+    .nav-logo span { color: var(--orange); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--gray-light); text-decoration: none;
+      font-size: 0.9rem; font-weight: 600; letter-spacing: 0.5px;
+      text-transform: uppercase; transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--orange); }
+    .nav-cta {
+      background: var(--orange); color: var(--white);
+      padding: 0.6rem 1.4rem; border-radius: 6px;
+      font-weight: 700; font-size: 0.85rem; text-decoration: none;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--orange-dark); }
+    @media (max-width: 900px) { .nav-links { display: none; } }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 70vh;
+      background:
+        linear-gradient(135deg, rgba(8,15,31,0.82) 0%, rgba(249,115,22,0.55) 100%),
+        url('https://images.unsplash.com/photo-1556906781-9a412961a28d?w=1600&q=80') center/cover no-repeat;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 8rem 5% 4rem;
+    }
+    .hero-inner { max-width: 700px; }
+    .hero-badge {
+      display: inline-block; background: var(--orange); color: var(--white);
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; padding: 0.35rem 1rem;
+      border-radius: 50px; margin-bottom: 1.5rem;
+    }
+    .hero-inner h1 {
+      font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 900;
+      line-height: 1.05; color: var(--white); margin-bottom: 1.2rem;
+    }
+    .hero-inner h1 span { color: var(--orange); }
+    .hero-inner p {
+      font-size: 1.1rem; color: rgba(255,255,255,0.85);
+      max-width: 520px; margin: 0 auto 2.5rem;
+    }
+
+/* ── SHARED ── */
+    section { padding: 6rem 5%; }
+    .section-tag {
+      display: inline-block; font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 900; line-height: 1.15; margin-bottom: 1rem;
+    }
+    .sub {
+      font-size: 1.05rem; color: var(--gray-text);
+      max-width: 560px; margin-bottom: 3rem;
+    }
+
+    /* ── PRODUCT SECTION ── */
+    #collection { background: var(--off-white); }
+    .collection-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2.5rem; max-width: 1100px; margin: 0 auto;
+    }
+    .product-card {
+      background: var(--white); border-radius: 18px; overflow: hidden;
+      box-shadow: 0 4px 24px rgba(10,46,110,0.08);
+      border: 1px solid var(--gray-light);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(10,46,110,0.14);
+    }
+    .product-card img {
+      width: 100%; height: 380px; object-fit: cover; display: block;
+    }
+    .product-body { padding: 1.8rem; }
+    .product-badge {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--orange); margin-bottom: 0.4rem;
+    }
+    .product-body h3 {
+      font-size: 1.4rem; font-weight: 900; color: var(--blue); margin-bottom: 0.5rem;
+    }
+    .product-body p {
+      font-size: 0.92rem; color: var(--gray-text); margin-bottom: 1.5rem;
+    }
+    .product-price {
+      font-size: 1.6rem; font-weight: 900; color: var(--blue); margin-bottom: 1.2rem;
+    }
+    .size-row {
+      display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem;
+    }
+    .size-btn {
+      padding: 0.4rem 0.8rem; border: 2px solid var(--gray-light);
+      border-radius: 6px; font-size: 0.8rem; font-weight: 700;
+      cursor: pointer; background: var(--white); color: var(--blue);
+      transition: all 0.15s;
+    }
+    .size-btn:hover, .size-btn.active {
+      border-color: var(--orange); color: var(--orange);
+    }
+    .btn-buy {
+      display: block; width: 100%; text-align: center;
+      background: var(--orange); color: var(--white);
+      padding: 1rem; border-radius: 10px; font-weight: 800;
+      font-size: 1rem; text-decoration: none; letter-spacing: 0.5px;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-buy:hover { background: var(--orange-dark); transform: translateY(-1px); }
+    .btn-buy-outline {
+      display: block; width: 100%; text-align: center;
+      background: transparent; color: var(--blue);
+      padding: 1rem; border-radius: 10px; font-weight: 700;
+      font-size: 1rem; text-decoration: none;
+      border: 2px solid var(--blue-light); margin-top: 0.75rem;
+      transition: all 0.2s;
+    }
+    .btn-buy-outline:hover { background: var(--blue); color: var(--white); }
+
+    /* ── PROMO VIDEOS ── */
+    #promo-videos { background: var(--dark); }
+    #promo-videos h2 { color: var(--white); }
+    #promo-videos .sub { color: rgba(255,255,255,0.6); }
+    .videos-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem; max-width: 1100px; margin: 0 auto;
+    }
+    .video-wrap video {
+      width: 100%; border-radius: 14px; background: #000;
+      display: block; box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    .video-label {
+      color: rgba(255,255,255,0.7); font-size: 0.9rem;
+      font-weight: 600; margin-top: 0.8rem;
+    }
+
+    /* ── FEATURES STRIP ── */
+    #features {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%);
+      padding: 4rem 5%;
+    }
+    .features-row {
+      display: flex; gap: 2rem; justify-content: center;
+      flex-wrap: wrap; max-width: 900px; margin: 0 auto;
+    }
+    .feat {
+      text-align: center; color: var(--white); flex: 1; min-width: 160px;
+    }
+    .feat-icon { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
+    .feat h4 { font-size: 0.9rem; font-weight: 800; margin-bottom: 0.3rem; }
+    .feat p { font-size: 0.8rem; opacity: 0.75; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark); border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 3rem 5%; color: rgba(255,255,255,0.6); text-align: center;
+    }
+    footer .nav-logo { font-size: 1.4rem; display: inline-block; margin-bottom: 1rem; }
+    footer p { font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; }
+    .footer-social { display: flex; gap: 0.75rem; justify-content: center; margin: 1.2rem 0; }
+    .social-btn {
+      width: 38px; height: 38px; border-radius: 8px;
+      background: rgba(255,255,255,0.08); display: flex;
+      align-items: center; justify-content: center; font-size: 1rem;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .social-btn:hover { background: var(--orange); }
+    .footer-bottom {
+      margin-top: 1.5rem; padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.78rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<nav>
+  <a href="index.html" class="nav-logo">Infinite<span>Rezultz</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#classes">Classes</a></li>
+    <li><a href="index.html#community">Community</a></li>
+    <li><a href="shop.html" class="active">Merch</a></li>
+    <li><a href="index.html#booking">Pricing</a></li>
+  </ul>
+  <a href="index.html#signup" class="nav-cta">Join Free</a>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Limited Drop · IR Apparel Collection</div>
+    <h1>Wear the <span>Limitless</span> Mindset.</h1>
+    <p>Official Infinite Rezultz gear — built for athletes, made for everyday. Rep the brand that reps your grind.</p>
+  </div>
+</section>
+
+<!-- ══ FEATURES STRIP ══ -->
+<section id="features">
+  <div class="features-row">
+    <div class="feat">
+      <span class="feat-icon">🚚</span>
+      <h4>Free Shipping</h4>
+      <p>On orders over $50</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">♻️</span>
+      <h4>Premium Fabric</h4>
+      <p>Moisture-wicking, preshrunk</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">📦</span>
+      <h4>Easy Returns</h4>
+      <p>30-day hassle-free returns</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">🏅</span>
+      <h4>Limited Drops</h4>
+      <p>Exclusive designs, limited qty</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRODUCT COLLECTION ══ -->
+<section id="collection">
+  <span class="section-tag">The Limitless Collection</span>
+  <h2>Rep the Brand</h2>
+  <p class="sub">Every piece is designed with the same energy we bring to every class — bold, purposeful, and built to last.</p>
+
+  <div class="collection-grid">
+
+    <div class="product-card">
+      <img
+        src="https://www.dropbox.com/scl/fi/x0dkw91l3rwtpla3uhita/AO4I0082.jpg?rlkey=n03p8wlxdnrwkhnj2o4qss1a2&st=6iqi9dyz&raw=1"
+        alt="IR Limitless Tee - Style 1"
+      />
+      <div class="product-body">
+        <div class="product-badge">New Drop · IR Apparel</div>
+        <h3>Limitless Tee — Style 1</h3>
+        <p>Premium moisture-wicking fabric. Bold IR branding. Wear it to the gym, out the gym — anywhere you grind.</p>
+        <div class="product-price">$29.99</div>
+        <div class="size-row">
+          <button class="size-btn">XS</button>
+          <button class="size-btn">S</button>
+          <button class="size-btn active">M</button>
+          <button class="size-btn">L</button>
+          <button class="size-btn">XL</button>
+          <button class="size-btn">2XL</button>
+        </div>
+        <!-- Replace href with your store/payment link -->
+        <a href="#" class="btn-buy">Add to Cart →</a>
+        <a href="index.html#signup" class="btn-buy-outline">Join to Get Member Pricing</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img
+        src="https://www.dropbox.com/scl/fi/5w6t05hisrtrypjslwnim/AO4I0075.jpg?rlkey=7778qvbdymgz18i8zc49tl2fz&st=p63lu057&raw=1"
+        alt="IR Limitless Tee - Style 2"
+      />
+      <div class="product-body">
+        <div class="product-badge">New Drop · IR Apparel</div>
+        <h3>Limitless Tee — Style 2</h3>
+        <p>Signature Infinite Rezultz design. Lightweight, breathable, and cut for performance and everyday wear.</p>
+        <div class="product-price">$29.99</div>
+        <div class="size-row">
+          <button class="size-btn">XS</button>
+          <button class="size-btn">S</button>
+          <button class="size-btn active">M</button>
+          <button class="size-btn">L</button>
+          <button class="size-btn">XL</button>
+          <button class="size-btn">2XL</button>
+        </div>
+        <!-- Replace href with your store/payment link -->
+        <a href="#" class="btn-buy">Add to Cart →</a>
+        <a href="index.html#signup" class="btn-buy-outline">Join to Get Member Pricing</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ PROMO VIDEOS ══ -->
+<section id="promo-videos">
+  <div style="max-width:1100px;margin:0 auto;">
+    <span class="section-tag">In Action</span>
+    <h2>Watch the Drop</h2>
+    <p class="sub">See the Limitless collection in motion — straight from the IR team.</p>
+    <div class="videos-grid">
+      <div class="video-wrap">
+        <video controls playsinline>
+          <source src="https://www.dropbox.com/scl/fi/bztclaio5lyjxjkted77r/LimitlessV1_Promo.mp4?rlkey=oimqvd07lp186kb78b3hntr6v&st=umlxqocn&raw=1" type="video/mp4">
+        </video>
+        <p class="video-label">Limitless V1 — Official Promo</p>
+      </div>
+      <div class="video-wrap">
+        <video controls playsinline>
+          <source src="https://www.dropbox.com/scl/fi/qx2enkr2qu0xcu661c60u/IG-FB-Reel-Ad.mp4?rlkey=cgzf9jatiinku0aclz9a2a4wf&st=lpdj324c&raw=1" type="video/mp4">
+        </video>
+        <p class="video-label">IR Reel — Instagram & Facebook Ad</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <a href="index.html" class="nav-logo">Infinite<span style="color:var(--orange)">Rezultz</span></a>
+  <p>Atlanta's premier fitness community led by Zakiya Abdullah.</p>
+  <div class="footer-social">
+    <a href="https://www.instagram.com/infiniterezz_/" target="_blank" rel="noopener" class="social-btn">📸</a>
+    <a href="https://www.youtube.com/@infinite_za" target="_blank" rel="noopener" class="social-btn">🎥</a>
+    <a href="https://www.facebook.com" target="_blank" rel="noopener" class="social-btn">💬</a>
+    <a href="https://www.tiktok.com" target="_blank" rel="noopener" class="social-btn">🎵</a>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Infinite Rezultz. All rights reserved. · <a href="index.html">Back to Main Site</a></p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.size-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.size-row').querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

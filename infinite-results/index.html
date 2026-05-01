@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infinite Rezultz | Train. Transform. Thrive.</title>
+  <style>
+    :root {
+      --blue:       #0A2E6E;
+      --blue-mid:   #1A4DB8;
+      --blue-light: #2D6BE4;
+      --orange:     #F97316;
+      --orange-dark:#D95F05;
+      --white:      #FFFFFF;
+      --off-white:  #F8F9FF;
+      --gray-light: #E8ECF5;
+      --gray-text:  #555E7A;
+      --dark:       #080F1F;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: var(--dark);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 5%;
+      background: rgba(8, 15, 31, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--orange);
+    }
+    .nav-logo {
+      font-size: 1.5rem; font-weight: 900; letter-spacing: -0.5px;
+      color: var(--white); text-decoration: none;
+    }
+    .nav-logo span { color: var(--orange); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--gray-light); text-decoration: none;
+      font-size: 0.9rem; font-weight: 600; letter-spacing: 0.5px;
+      text-transform: uppercase; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-cta {
+      background: var(--orange); color: var(--white);
+      padding: 0.6rem 1.4rem; border-radius: 6px;
+      font-weight: 700; font-size: 0.85rem; text-decoration: none;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .nav-cta:hover { background: var(--orange-dark); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background:
+        linear-gradient(135deg, rgba(8,15,31,0.88) 0%, rgba(26,77,184,0.7) 100%),
+        url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1600&q=80') center/cover no-repeat;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 8rem 5% 4rem;
+    }
+    .hero-inner { max-width: 780px; }
+    .hero-badge {
+      display: inline-block;
+      background: var(--orange); color: var(--white);
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; padding: 0.35rem 1rem;
+      border-radius: 50px; margin-bottom: 1.5rem;
+    }
+    .hero-inner h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 900; line-height: 1.05;
+      color: var(--white); margin-bottom: 1.5rem;
+    }
+    .hero-inner h1 span { color: var(--orange); }
+    .hero-inner p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(255,255,255,0.85); max-width: 600px;
+      margin: 0 auto 2.5rem;
+    }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--orange); color: var(--white);
+      padding: 1rem 2.2rem; border-radius: 8px;
+      font-weight: 800; font-size: 1rem; text-decoration: none;
+      letter-spacing: 0.3px; transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(249,115,22,0.4);
+    }
+    .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); }
+    .btn-secondary {
+      background: transparent; color: var(--white);
+      padding: 1rem 2.2rem; border-radius: 8px;
+      font-weight: 700; font-size: 1rem; text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.5); transition: all 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
+    .hero-stats {
+      display: flex; gap: 3rem; justify-content: center;
+      margin-top: 4rem; flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-size: 2.2rem; font-weight: 900; color: var(--orange);
+      display: block; line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.7);
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+
+    /* ── SECTIONS SHARED ── */
+    section { padding: 6rem 5%; }
+    .section-tag {
+      display: inline-block; font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 900; line-height: 1.15; margin-bottom: 1rem;
+    }
+    .sub {
+      font-size: 1.05rem; color: var(--gray-text);
+      max-width: 580px; margin-bottom: 3rem;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--off-white); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+      align-items: center; max-width: 1100px; margin: 0 auto;
+    }
+    .about-img-wrap {
+      position: relative; border-radius: 16px; overflow: hidden;
+      box-shadow: 0 24px 60px rgba(10,46,110,0.18);
+    }
+    .about-img-wrap img { width: 100%; height: 460px; object-fit: cover; display: block; }
+    .about-badge-float {
+      position: absolute; bottom: 1.5rem; left: 1.5rem;
+      background: var(--orange); color: var(--white);
+      padding: 0.9rem 1.4rem; border-radius: 10px;
+      font-weight: 800; font-size: 1rem; line-height: 1.2;
+    }
+    .about-badge-float span { display: block; font-size: 0.75rem; font-weight: 600; opacity: 0.85; }
+    .about-text h2 { color: var(--blue); }
+    .values { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+    .value-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+      background: var(--white); padding: 1rem 1.2rem; border-radius: 10px;
+      border-left: 4px solid var(--orange);
+      box-shadow: 0 2px 12px rgba(10,46,110,0.06);
+    }
+    .value-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .value-item strong { display: block; font-weight: 700; color: var(--blue); }
+    .value-item p { font-size: 0.88rem; color: var(--gray-text); margin: 0; }
+
+    /* ── CLASSES ── */
+    #classes { background: var(--dark); }
+    #classes h2 { color: var(--white); }
+    #classes .sub { color: rgba(255,255,255,0.6); }
+    #classes .section-tag { color: var(--orange); }
+    .classes-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.5rem; max-width: 1200px; margin: 0 auto;
+    }
+    .class-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px; overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .class-card:hover { transform: translateY(-4px); border-color: var(--orange); }
+    .class-img {
+      height: 180px; object-fit: cover; width: 100%; display: block;
+      background: linear-gradient(135deg, var(--blue-mid), var(--blue-light));
+    }
+    .class-img-placeholder {
+      height: 180px; display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+    .class-body { padding: 1.4rem; }
+    .class-tag {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--orange); margin-bottom: 0.4rem;
+    }
+    .class-body h3 { color: var(--white); font-size: 1.1rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .class-body p { color: rgba(255,255,255,0.55); font-size: 0.88rem; margin-bottom: 1.2rem; }
+    .class-meta {
+      display: flex; gap: 1rem; font-size: 0.8rem;
+      color: rgba(255,255,255,0.5); border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 1rem;
+    }
+    .class-meta span::before { margin-right: 0.3rem; }
+
+    /* ── SIGN UP FORM ── */
+    #signup {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%);
+      text-align: center;
+    }
+    #signup h2 { color: var(--white); }
+    #signup .sub { color: rgba(255,255,255,0.75); margin: 0 auto 3rem; }
+    #signup .section-tag { color: var(--orange); }
+    .form-container {
+      max-width: 600px; margin: 0 auto;
+      background: var(--white); border-radius: 16px;
+      padding: 2.5rem; box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    }
+    .form-container h3 {
+      font-size: 1.3rem; font-weight: 800; color: var(--blue);
+      margin-bottom: 0.5rem;
+    }
+    .form-container p { font-size: 0.9rem; color: var(--gray-text); margin-bottom: 1.5rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+    .form-group label { font-size: 0.8rem; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.5px; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 0.75rem 1rem; border: 2px solid var(--gray-light);
+      border-radius: 8px; font-size: 0.95rem; font-family: inherit;
+      transition: border-color 0.2s; color: var(--dark); background: var(--white);
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none; border-color: var(--orange);
+    }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-submit {
+      width: 100%; padding: 1rem; background: var(--orange);
+      color: var(--white); border: none; border-radius: 8px;
+      font-size: 1rem; font-weight: 800; cursor: pointer;
+      text-transform: uppercase; letter-spacing: 1px;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 0.5rem;
+    }
+    .form-submit:hover { background: var(--orange-dark); transform: translateY(-1px); }
+    .form-note { font-size: 0.75rem; color: var(--gray-text); text-align: center; margin-top: 1rem; }
+    /* Embed placeholder */
+    .form-embed-placeholder {
+      background: var(--gray-light); border: 2px dashed var(--blue-light);
+      border-radius: 10px; padding: 2rem; text-align: center;
+      color: var(--blue); font-size: 0.9rem; margin-top: 1rem;
+    }
+    .form-embed-placeholder code {
+      display: block; background: rgba(10,46,110,0.08);
+      padding: 0.5rem; border-radius: 6px; margin-top: 0.5rem;
+      font-size: 0.8rem; color: var(--blue-mid);
+    }
+
+    /* ── COMMUNITY ── */
+    #community { background: var(--off-white); }
+    .community-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+      align-items: center; max-width: 1100px; margin: 0 auto;
+    }
+    .community-text h2 { color: var(--blue); }
+    .community-features { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 2rem; }
+    .comm-feature {
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .comm-icon {
+      width: 46px; height: 46px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; flex-shrink: 0;
+    }
+    .comm-feature strong { display: block; font-weight: 700; color: var(--blue); }
+    .comm-feature p { font-size: 0.88rem; color: var(--gray-text); margin: 0; }
+    .social-cards {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    }
+    .social-card {
+      background: var(--white); border-radius: 14px; padding: 1.5rem;
+      text-align: center; box-shadow: 0 4px 20px rgba(10,46,110,0.08);
+      border: 1px solid var(--gray-light); transition: transform 0.2s;
+    }
+    .social-card:hover { transform: translateY(-3px); }
+    .social-icon { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
+    .social-card h4 { font-size: 0.9rem; font-weight: 800; color: var(--blue); }
+    .social-card p { font-size: 0.8rem; color: var(--gray-text); margin: 0.3rem 0; }
+    .social-card a {
+      display: inline-block; margin-top: 0.6rem;
+      font-size: 0.8rem; font-weight: 700;
+      color: var(--orange); text-decoration: none;
+    }
+    .social-card a:hover { color: var(--orange-dark); }
+
+    /* ── PRODUCTS ── */
+    #products { background: var(--white); }
+    #products h2 { color: var(--blue); }
+    .products-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem; max-width: 1100px; margin: 0 auto;
+    }
+    .product-card {
+      border: 1px solid var(--gray-light); border-radius: 14px;
+      overflow: hidden; transition: all 0.2s;
+      box-shadow: 0 2px 12px rgba(10,46,110,0.05);
+    }
+    .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(10,46,110,0.12); }
+    .product-img-placeholder {
+      height: 200px; display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem;
+    }
+    .product-body { padding: 1.2rem; }
+    .product-badge {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--orange);
+    }
+    .product-body h3 { font-size: 1rem; font-weight: 800; color: var(--blue); margin: 0.3rem 0; }
+    .product-body p { font-size: 0.85rem; color: var(--gray-text); margin-bottom: 1rem; }
+    .product-footer {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .price { font-size: 1.1rem; font-weight: 900; color: var(--blue); }
+    .price .orig { font-size: 0.8rem; color: var(--gray-text); text-decoration: line-through; margin-left: 0.3rem; }
+    .btn-shop {
+      background: var(--orange); color: var(--white);
+      padding: 0.5rem 1rem; border-radius: 6px;
+      font-weight: 700; font-size: 0.8rem; text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-shop:hover { background: var(--orange-dark); }
+
+    /* ── BOOKING ── */
+    #booking {
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+      text-align: center;
+    }
+    #booking h2 { color: var(--white); }
+    #booking .sub { color: rgba(255,255,255,0.85); margin: 0 auto 3rem; }
+    .booking-options {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem; max-width: 900px; margin: 0 auto 3rem;
+    }
+    .booking-card {
+      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 14px; padding: 2rem; color: var(--white);
+      transition: all 0.2s; backdrop-filter: blur(8px);
+    }
+    .booking-card:hover { background: rgba(255,255,255,0.22); transform: translateY(-3px); }
+    .booking-card .price-tag {
+      font-size: 2rem; font-weight: 900; display: block; margin: 0.5rem 0;
+    }
+    .booking-card h3 { font-size: 1.1rem; font-weight: 800; }
+    .booking-card p { font-size: 0.85rem; opacity: 0.85; margin: 0.5rem 0 1.5rem; }
+    .booking-card ul {
+      list-style: none; text-align: left; font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+    .booking-card ul li { padding: 0.2rem 0; opacity: 0.9; }
+    .booking-card ul li::before { content: "✓ "; font-weight: 700; }
+    .btn-book {
+      display: inline-block; background: var(--white);
+      color: var(--orange); padding: 0.75rem 1.8rem;
+      border-radius: 8px; font-weight: 800; font-size: 0.9rem;
+      text-decoration: none; transition: all 0.2s; width: 100%; text-align: center;
+    }
+    .btn-book:hover { background: var(--dark); color: var(--white); }
+    .booking-popular { background: rgba(255,255,255,0.25); border-color: var(--white); }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--dark); }
+    #testimonials h2 { color: var(--white); }
+    #testimonials .section-tag { color: var(--orange); }
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem; max-width: 1100px; margin: 0 auto;
+    }
+    .testimonial-card {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px; padding: 2rem;
+    }
+    .stars { color: var(--orange); font-size: 1rem; margin-bottom: 1rem; }
+    .testimonial-card p { color: rgba(255,255,255,0.75); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem; }
+    .testimonial-author { display: flex; align-items: center; gap: 0.8rem; }
+    .author-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--orange), var(--blue-light));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; color: var(--white); font-size: 1rem;
+    }
+    .author-info strong { display: block; font-weight: 700; color: var(--white); font-size: 0.9rem; }
+    .author-info span { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark); border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 4rem 5% 2rem; color: rgba(255,255,255,0.6);
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+      max-width: 1100px; margin: 0 auto 3rem;
+    }
+    .footer-brand .nav-logo { font-size: 1.6rem; }
+    .footer-brand p { font-size: 0.88rem; margin-top: 1rem; max-width: 280px; line-height: 1.7; }
+    .footer-social { display: flex; gap: 0.75rem; margin-top: 1.5rem; }
+    .social-btn {
+      width: 38px; height: 38px; border-radius: 8px;
+      background: rgba(255,255,255,0.08); display: flex;
+      align-items: center; justify-content: center; font-size: 1rem;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .social-btn:hover { background: var(--orange); }
+    .footer-col h4 {
+      color: var(--white); font-size: 0.85rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1.2rem;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.6rem; }
+    .footer-col ul a {
+      color: rgba(255,255,255,0.55); text-decoration: none;
+      font-size: 0.88rem; transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: var(--orange); }
+    .footer-bottom {
+      max-width: 1100px; margin: 0 auto;
+      padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.8rem; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-bottom a { color: var(--orange); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .about-grid, .community-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      nav .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 4rem 5%; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-stats { gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<nav>
+  <a href="#hero" class="nav-logo">Infinite<span>Rezultz</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#classes">Classes</a></li>
+    <li><a href="#community">Community</a></li>
+    <li><a href="shop.html">Merch</a></li>
+    <li><a href="#booking">Pricing</a></li>
+  </ul>
+  <a href="#signup" class="nav-cta">Get Started Free</a>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🔥 Atlanta's Premier Fitness Community</div>
+    <h1>Train Hard.<br /><span>Get Infinite</span> Results.</h1>
+    <p>Join a proven fitness community led by Zakiya Abdullah. Real coaching, real accountability, and real transformation — whether you're just starting or leveling up.</p>
+    <div class="hero-btns">
+      <a href="#signup" class="btn-primary">Join a Free Class →</a>
+      <a href="#classes" class="btn-secondary">View Schedule</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">500+</span>
+        <span class="stat-label">Members Transformed</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">10+</span>
+        <span class="stat-label">Classes Per Week</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">98%</span>
+        <span class="stat-label">Satisfaction Rate</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-img-wrap">
+      <img
+        src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80"
+        alt="Infinite Rezultz fitness training"
+      />
+      <div class="about-badge-float">
+        Founded by Zakiya Abdullah
+        <span>Head Coach & Community Leader</span>
+      </div>
+    </div>
+    <div class="about-text">
+      <span class="section-tag">Our Story</span>
+      <h2>More Than a Gym.<br />It's a Movement.</h2>
+      <p class="sub">Infinite Rezultz was built on the belief that fitness isn't a destination — it's a lifestyle. We combine elite coaching, a tight-knit community, and proven programming to help you unlock your potential.</p>
+      <div class="values">
+        <div class="value-item">
+          <div class="value-icon">💪</div>
+          <div>
+            <strong>Expert-Led Coaching</strong>
+            <p>Every class is designed and led by certified trainers who care about your progress.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">🤝</div>
+          <div>
+            <strong>Built-In Accountability</strong>
+            <p>Our community keeps you showing up, pushing harder, and celebrating wins together.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">📈</div>
+          <div>
+            <strong>Results-Driven Programs</strong>
+            <p>From weight loss to strength training, our programs are built to deliver measurable results.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CLASSES ══ -->
+<section id="classes">
+  <div style="max-width:1200px;margin:0 auto;">
+    <span class="section-tag">What We Offer</span>
+    <h2 style="color:var(--white)">Classes for Every Level</h2>
+    <p class="sub">From beginner-friendly sessions to advanced HIIT, we've got the perfect class to match your goals and schedule.</p>
+    <div class="classes-grid">
+
+      <div class="class-card">
+        <div class="class-img-placeholder" style="background:linear-gradient(135deg,#0A2E6E,#2D6BE4);">🏋️</div>
+        <div class="class-body">
+          <div class="class-tag">Strength</div>
+          <h3>Power Lift Fundamentals</h3>
+          <p>Master the big lifts with proper form and progressive overload principles.</p>
+          <div class="class-meta">
+            <span>⏱ 60 min</span>
+            <span>👥 All Levels</span>
+            <span>🔥 High Intensity</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="class-card">
+        <div class="class-img-placeholder" style="background:linear-gradient(135deg,#7C2D12,#F97316);">⚡</div>
+        <div class="class-body">
+          <div class="class-tag">Cardio</div>
+          <h3>HIIT Burn Circuit</h3>
+          <p>Torch calories and boost your metabolism with high-intensity interval training.</p>
+          <div class="class-meta">
+            <span>⏱ 45 min</span>
+            <span>👥 Intermediate</span>
+            <span>🔥 Max Burn</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="class-card">
+        <div class="class-img-placeholder" style="background:linear-gradient(135deg,#064E3B,#10B981);">🧘</div>
+        <div class="class-body">
+          <div class="class-tag">Recovery</div>
+          <h3>Mobility & Stretch Flow</h3>
+          <p>Improve flexibility, reduce soreness, and keep your body moving at its best.</p>
+          <div class="class-meta">
+            <span>⏱ 50 min</span>
+            <span>👥 All Levels</span>
+            <span>🧘 Low Impact</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="class-card">
+        <div class="class-img-placeholder" style="background:linear-gradient(135deg,#4C1D95,#8B5CF6);">🥊</div>
+        <div class="class-body">
+          <div class="class-tag">Combat Fitness</div>
+          <h3>Kickbox Cardio</h3>
+          <p>Combine boxing fundamentals with cardio for a full-body, stress-busting workout.</p>
+          <div class="class-meta">
+            <span>⏱ 55 min</span>
+            <span>👥 Beginner+</span>
+            <span>🔥 High Burn</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="class-card">
+        <div class="class-img-placeholder" style="background:linear-gradient(135deg,#1E3A8A,#F97316);">🏃</div>
+        <div class="class-body">
+          <div class="class-tag">Endurance</div>
+          <h3>Run Club & Conditioning</h3>
+          <p>Build your aerobic base and run farther, faster — together as a community.</p>
+          <div class="class-meta">
+            <span>⏱ 60 min</span>
+            <span>👥 All Levels</span>
+            <span>🌅 Early AM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="class-card">
+        <div class="class-img-placeholder" style="background:linear-gradient(135deg,#831843,#EC4899);">💃</div>
+        <div class="class-body">
+          <div class="class-tag">Dance Fitness</div>
+          <h3>Zumba & Dance Cardio</h3>
+          <p>Have fun, move your body, and burn calories without feeling like it's work.</p>
+          <div class="class-meta">
+            <span>⏱ 50 min</span>
+            <span>👥 All Levels</span>
+            <span>🎶 Party Vibes</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROMO VIDEOS ══ -->
+<section id="videos" style="background:var(--dark);padding:6rem 5%;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <span class="section-tag">Watch & Get Inspired</span>
+    <h2 style="color:var(--white);">See What We're About</h2>
+    <p class="sub" style="color:rgba(255,255,255,0.6);">Straight from Atlanta — real training, real energy, real results.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:2rem;">
+      <div>
+        <video controls playsinline style="width:100%;border-radius:14px;background:#000;display:block;">
+          <source src="https://www.dropbox.com/scl/fi/bztclaio5lyjxjkted77r/LimitlessV1_Promo.mp4?rlkey=oimqvd07lp186kb78b3hntr6v&st=umlxqocn&raw=1" type="video/mp4">
+        </video>
+        <p style="color:rgba(255,255,255,0.7);font-size:0.9rem;margin-top:0.8rem;font-weight:600;">Limitless Collection Promo</p>
+      </div>
+      <div>
+        <video controls playsinline style="width:100%;border-radius:14px;background:#000;display:block;">
+          <source src="https://www.dropbox.com/scl/fi/qx2enkr2qu0xcu661c60u/IG-FB-Reel-Ad.mp4?rlkey=cgzf9jatiinku0aclz9a2a4wf&st=lpdj324c&raw=1" type="video/mp4">
+        </video>
+        <p style="color:rgba(255,255,255,0.7);font-size:0.9rem;margin-top:0.8rem;font-weight:600;">IR Reel — As Seen on Instagram & Facebook</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SIGN UP FORM ══ -->
+<section id="signup">
+  <span class="section-tag">Free Trial Class</span>
+  <h2>Your First Class Is On Us</h2>
+  <p class="sub">Sign up below and we'll match you with the perfect class to kick off your Infinite Rezultz journey.</p>
+
+  <div class="form-container">
+    <h3>Reserve Your Free Class</h3>
+    <p>Fill out the form below and our team will reach out within 24 hours to confirm your spot.</p>
+
+    <!-- ────────────────────────────────────────────────────
+         TO EMBED A THIRD-PARTY FORM (e.g., Jotform, Typeform,
+         HubSpot, Mindbody):
+         1. Delete everything inside .form-container below
+         2. Paste your embed code in its place
+         Example: <script src="..."></script> or <iframe ...>
+    ──────────────────────────────────────────────────── -->
+
+    <form onsubmit="handleSignup(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" name="fname" placeholder="Zakiya" required />
+        </div>
+        <div class="form-group">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" name="lname" placeholder="Abdullah" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required />
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="(404) 555-0100" />
+      </div>
+      <div class="form-group">
+        <label for="interest">I'm Most Interested In</label>
+        <select id="interest" name="interest">
+          <option value="">Select a class type...</option>
+          <option>Power Lift Fundamentals</option>
+          <option>HIIT Burn Circuit</option>
+          <option>Mobility & Stretch Flow</option>
+          <option>Kickbox Cardio</option>
+          <option>Run Club & Conditioning</option>
+          <option>Zumba & Dance Cardio</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="goal">My #1 Fitness Goal</label>
+        <textarea id="goal" name="goal" placeholder="e.g. Lose 20 lbs, build muscle, improve energy..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Claim My Free Class →</button>
+      <p class="form-note">🔒 No spam, ever. We respect your privacy and will never sell your information.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ══ COMMUNITY ══ -->
+<section id="community">
+  <div class="community-grid">
+    <div class="community-text">
+      <span class="section-tag">The IR Community</span>
+      <h2>Train Together. Win Together.</h2>
+      <p class="sub">When you join Infinite Rezultz, you're not just signing up for classes — you're becoming part of a movement.</p>
+      <div class="community-features">
+        <div class="comm-feature">
+          <div class="comm-icon">📱</div>
+          <div>
+            <strong>Private Members Group</strong>
+            <p>Stay connected, share wins, get motivation, and access exclusive member content.</p>
+          </div>
+        </div>
+        <div class="comm-feature">
+          <div class="comm-icon">🏆</div>
+          <div>
+            <strong>Monthly Challenges</strong>
+            <p>Friendly competitions to keep you consistent and push past your comfort zone.</p>
+          </div>
+        </div>
+        <div class="comm-feature">
+          <div class="comm-icon">🎉</div>
+          <div>
+            <strong>Member Events</strong>
+            <p>Workshops, pop-up workouts, community dinners, and exclusive member meetups.</p>
+          </div>
+        </div>
+        <div class="comm-feature">
+          <div class="comm-icon">📊</div>
+          <div>
+            <strong>Progress Tracking</strong>
+            <p>Regular check-ins and progress photos to celebrate how far you've come.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="social-cards">
+      <div class="social-card">
+        <span class="social-icon">📸</span>
+        <h4>Instagram</h4>
+        <p>Daily workouts, tips & motivation</p>
+        <a href="https://www.instagram.com/infiniterezz_/" target="_blank" rel="noopener">@infiniterezz_ →</a>
+      </div>
+      <div class="social-card">
+        <span class="social-icon">🎥</span>
+        <h4>YouTube</h4>
+        <p>Free workout videos & tutorials</p>
+        <a href="https://www.youtube.com/@infinite_za" target="_blank" rel="noopener">Subscribe Free →</a>
+      </div>
+      <div class="social-card">
+        <span class="social-icon">💬</span>
+        <h4>Facebook</h4>
+        <p>Private members community group</p>
+        <a href="https://www.facebook.com" target="_blank" rel="noopener">Join the Group →</a>
+      </div>
+      <div class="social-card">
+        <span class="social-icon">🎵</span>
+        <h4>TikTok</h4>
+        <p>Quick tips, reels & challenges</p>
+        <a href="https://www.tiktok.com" target="_blank" rel="noopener">@InfiniteRezultz →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ AFFILIATE PRODUCTS ══ -->
+<section id="products">
+  <span class="section-tag">Recommended Gear & Supplements</span>
+  <h2>Shop the IR Store</h2>
+  <p class="sub">Everything our coaches use and recommend — hand-picked to support your training and recovery.</p>
+
+  <!-- ─────────────────────────────────────────────────
+       AFFILIATE NOTE: Replace the href links below with
+       your affiliate URLs (Amazon Associates, etc.)
+       or swap this section for your actual store embed.
+  ───────────────────────────────────────────────── -->
+
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-img-placeholder" style="background:linear-gradient(135deg,#0A2E6E,#2D6BE4);">💊</div>
+      <div class="product-body">
+        <div class="product-badge">Best Seller · Supplement</div>
+        <h3>IR Pre-Workout Blend</h3>
+        <p>Clean energy, no crash. Our coach-approved pre-workout for peak performance.</p>
+        <div class="product-footer">
+          <div class="price">$39.99 <span class="orig">$49</span></div>
+          <a href="#products" class="btn-shop">Shop Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img-placeholder" style="background:linear-gradient(135deg,#F97316,#D95F05);">👟</div>
+      <div class="product-body">
+        <div class="product-badge">Coach Pick · Footwear</div>
+        <h3>Cross-Training Shoes</h3>
+        <p>Stability, flexibility, and support for every type of workout we offer.</p>
+        <div class="product-footer">
+          <div class="price">$89.99 <span class="orig">$110</span></div>
+          <a href="#products" class="btn-shop">Shop Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img-placeholder" style="background:linear-gradient(135deg,#064E3B,#10B981);">🥤</div>
+      <div class="product-body">
+        <div class="product-badge">Recovery · Supplement</div>
+        <h3>Protein Recovery Shake</h3>
+        <p>30g clean protein, low sugar. Repair and rebuild after every session.</p>
+        <div class="product-footer">
+          <div class="price">$54.99 <span class="orig">$65</span></div>
+          <a href="#products" class="btn-shop">Shop Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://www.dropbox.com/scl/fi/x0dkw91l3rwtpla3uhita/AO4I0082.jpg?rlkey=n03p8wlxdnrwkhnj2o4qss1a2&st=6iqi9dyz&raw=1" alt="IR Limitless Tee" style="width:100%;height:200px;object-fit:cover;display:block;" />
+      <div class="product-body">
+        <div class="product-badge">Apparel · Limited Drop</div>
+        <h3>IR Limitless Tee</h3>
+        <p>Rep the brand. Moisture-wicking, durable, and built for the grind.</p>
+        <div class="product-footer">
+          <div class="price">$29.99</div>
+          <a href="shop.html" class="btn-shop">See Collection</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BOOKING / PRICING ══ -->
+<section id="booking">
+  <span class="section-tag" style="color:rgba(255,255,255,0.8)">Memberships</span>
+  <h2>Simple, Flexible Pricing</h2>
+  <p class="sub">No hidden fees. Cancel anytime. Choose the plan that fits your goals and schedule.</p>
+  <div class="booking-options">
+    <div class="booking-card">
+      <h3>Drop-In</h3>
+      <span class="price-tag">$18</span>
+      <p>Per single class. No commitment required.</p>
+      <ul>
+        <li>Access to any 1 class</li>
+        <li>No enrollment fee</li>
+        <li>Try before you commit</li>
+        <li>Class recording access</li>
+      </ul>
+      <a href="#signup" class="btn-book">Book a Class</a>
+    </div>
+    <div class="booking-card booking-popular">
+      <div style="font-size:0.75rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;opacity:0.9;margin-bottom:0.5rem;">⭐ Most Popular</div>
+      <h3>Monthly Unlimited</h3>
+      <span class="price-tag">$79/mo</span>
+      <p>Unlimited classes. Full community access.</p>
+      <ul>
+        <li>Unlimited classes</li>
+        <li>Community group access</li>
+        <li>Monthly challenge entry</li>
+        <li>10% off IR store</li>
+        <li>Progress tracking</li>
+      </ul>
+      <a href="#signup" class="btn-book">Start Today</a>
+    </div>
+    <div class="booking-card">
+      <h3>VIP Coaching</h3>
+      <span class="price-tag">$199/mo</span>
+      <p>Everything in Unlimited + 1-on-1 access.</p>
+      <ul>
+        <li>Unlimited classes</li>
+        <li>2x private coaching sessions</li>
+        <li>Custom meal & workout plan</li>
+        <li>Priority booking</li>
+        <li>20% off IR store</li>
+      </ul>
+      <a href="#signup" class="btn-book">Apply Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ══ -->
+<section id="testimonials">
+  <div style="max-width:1100px;margin:0 auto;">
+    <span class="section-tag">Success Stories</span>
+    <h2>Real Results, Real People</h2>
+    <div class="testimonials-grid" style="margin-top:3rem;">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"Infinite Rezultz completely changed my life. In 6 months I lost 35 lbs and gained more confidence than I've had in years. The community keeps me accountable every single week."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">MT</div>
+          <div class="author-info">
+            <strong>Marcus T.</strong>
+            <span>Member since 2023 · Lost 35 lbs</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"Zakiya is an incredible coach. She pushes you, but makes you feel supported the whole way. The HIIT classes are no joke — but I've never felt stronger in my life."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">DP</div>
+          <div class="author-info">
+            <strong>Danielle P.</strong>
+            <span>Member since 2024 · +15 lbs muscle</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"I've tried 5 different gyms and nothing stuck. Infinite Rezultz is different because of the people. It doesn't feel like a chore — I actually look forward to coming in every day."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">JW</div>
+          <div class="author-info">
+            <strong>James W.</strong>
+            <span>Member since 2022 · 3+ years running</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#hero" class="nav-logo">Infinite<span>Rezultz</span></a>
+      <p>Atlanta's premier fitness community led by Zakiya Abdullah. Train hard, live well, and get infinite results.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/infiniterezz_/" target="_blank" rel="noopener" class="social-btn">📸</a>
+        <a href="https://www.facebook.com" target="_blank" rel="noopener" class="social-btn">💬</a>
+        <a href="https://www.youtube.com/@infinite_za" target="_blank" rel="noopener" class="social-btn">🎥</a>
+        <a href="https://www.tiktok.com" target="_blank" rel="noopener" class="social-btn">🎵</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Classes</h4>
+      <ul>
+        <li><a href="#classes">Power Lift</a></li>
+        <li><a href="#classes">HIIT Burn</a></li>
+        <li><a href="#classes">Mobility Flow</a></li>
+        <li><a href="#classes">Kickbox Cardio</a></li>
+        <li><a href="#classes">Run Club</a></li>
+        <li><a href="#classes">Dance Cardio</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#community">Community</a></li>
+        <li><a href="#booking">Pricing</a></li>
+        <li><a href="#products">Shop</a></li>
+        <li><a href="#signup">Free Trial</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:info@infiniteresults.com">info@infiniteresults.com</a></li>
+        <li><a href="tel:+14045550100">(404) 555-0100</a></li>
+        <li><a href="#signup">Book a Free Class</a></li>
+        <li><a href="#booking">Join Today</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Infinite Rezultz. All rights reserved.</span>
+    <div>
+      <a href="#">Privacy Policy</a> &nbsp;·&nbsp;
+      <a href="#">Terms of Service</a> &nbsp;·&nbsp;
+      <a href="#">Accessibility</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function handleSignup(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = '✅ You\'re on the list! We\'ll be in touch soon.';
+    btn.style.background = '#16a34a';
+    btn.disabled = true;
+    // TODO: wire this up to your form backend
+    // e.g. fetch('/api/signup', { method:'POST', body: new FormData(e.target) })
+  }
+
+  // Smooth scroll offset for fixed nav
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
